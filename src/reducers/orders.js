@@ -2,7 +2,9 @@ import Types from "../actions/actionTypes";
 
 const INITIAL_STATE = {
   cart: {},
-  totalPrice: 0
+  totalPrice: 0,
+  orderComplete: false,
+  loading: false
 };
 
 export default function order(state = INITIAL_STATE, action) {
@@ -32,10 +34,23 @@ export default function order(state = INITIAL_STATE, action) {
       } else {
         console.log("no item to delete");
       }
-
       return {
         ...state,
         cart: newCart
+      };
+    }
+    case Types.SUBMIT_ORDER: {
+      return {
+        ...state,
+        loading: true,
+        orderComplete: false
+      };
+    }
+    case Types.ORDER_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+        orderComplete: true
       };
     }
     default: {

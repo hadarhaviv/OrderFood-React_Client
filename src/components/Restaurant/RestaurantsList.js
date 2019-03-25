@@ -12,7 +12,7 @@ import * as restaurantsActions from "../../actions/restaurants";
 const styles = theme => ({
   card: {
     width: "18rem",
-    marginTop: "8%",
+    margin: "3%",
     boxSizing: "border-box"
   },
   media: {
@@ -72,13 +72,13 @@ class RestaurantsList extends Component {
   }
 }
 
-const mapStateToProps=(state) =>{
+const mapStateToProps = state => {
   return {
     restaurants: state.restaurants.restaurants
   };
-}
+};
 
-const mapDispatchToProps=(dispatch) =>{
+const mapDispatchToProps = dispatch => {
   return {
     actions: bindActionCreators(
       {
@@ -87,7 +87,7 @@ const mapDispatchToProps=(dispatch) =>{
       dispatch
     )
   };
-}
+};
 
 export default connect(
   mapStateToProps,

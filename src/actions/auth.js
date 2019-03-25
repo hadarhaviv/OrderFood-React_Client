@@ -11,7 +11,7 @@ export const adminLogin = credentials => ({
   credentials
 });
 
-export const loginSuccess = (token) => {
+export const loginSuccess = token => {
   localStorage.setItem("jwtToken", token);
   setAuthToken(token);
   return {
@@ -20,9 +20,16 @@ export const loginSuccess = (token) => {
   };
 };
 
-// export const setCurrentUser = decoded => {
-//   return {
-//     type: Types.SET_CURRENT_USER,
-//     payload: decoded
-//   };
-// };
+export const logoutUser = () => {
+  localStorage.removeItem("jwtToken");
+  return {
+    type: Types.LOGOUT_USER
+  };
+};
+
+export const handleErrors = errors => {
+  return {
+    type: Types.HANDLE_ERRORS,
+    errors
+  };
+};

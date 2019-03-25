@@ -6,7 +6,6 @@ import { withStyles } from "@material-ui/core/styles";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import MenuItem from "@material-ui/core/MenuItem";
 
 const styles = theme => ({
   root: {
@@ -45,7 +44,7 @@ class NavBar extends Component {
     const title = "Tasty Food";
     return (
       <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <Link className={classes.menuItem} to="/">
               <Typography variant="h6" color="inherit">
@@ -53,14 +52,9 @@ class NavBar extends Component {
               </Typography>
             </Link>
             <div className={classes.grow} />
-            <Link className={classes.menuItem} to="/cart">
-              <MenuItem>
-                <i className="fas fa-shopping-cart" />
-              </MenuItem>
-            </Link>
             <Button color="inherit">
               <Link className={classes.menuItem} to="/login">
-                Login
+                Logout
               </Link>
             </Button>
           </Toolbar>

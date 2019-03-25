@@ -7,10 +7,10 @@ import RestaurantsList from "./Restaurant/RestaurantsList";
 import * as authActions from "../actions/auth";
 import Cart from "./Restaurant/Cart/Cart";
 import Login from "./Auth/Login";
-import setAuthToken from "../utills/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import AdminContainer from "./containers/AdminContainer";
 
 class App extends Component {
   componentWillMount() {
@@ -21,31 +21,44 @@ class App extends Component {
       if (decoded.exp > currentTime) {
         this.props.actions.loginSuccess(token);
         this.props.history.push("/");
+      } else {
+        this.props.actions.logoutUser();
+        this.props.history.push("/login");
       }
-      // store.dispatch(clearCurrentProfile());
-      // store.dispatch(logoutUser());
-
-      // window.location.href = "/login"
     } else {
       this.props.history.push("/login");
     }
   }
 
   render() {
-    return (
-      <div className="app">
-        <Login />
-        {/* <MainContainer>
-          <Switch>
-            <Route path="/restaurant/:id" component={RestaurantContainer} />
-            <Route exact path="/" component={RestaurantsList} />
-            <Route exact path="/cart" component={Cart} />
-            <Route exact path="/login" component={Login} />
-            <Redirect to="/" />
-          </Switch>
-        </MainContainer> */}
-      </div>
-    );
+    let routes = <Route exact path="/login" component={Login} />;
+
+    if (this.props.isAuth) {
+      if (this.props.role === "user") {
+        routes = (
+          <MainContainer>
+            <Switch>
+              <Route path="/restaurant/:id" component={RestaurantContainer} />
+              <Route exact path="/" component={RestaurantsList} />
+              <Route exact path="/cart" component={Cart} />
+              <Redirect to="/" />
+            </Switch>
+          </MainContainer>
+        );
+      } else if (this.props.role === "owner") {
+        routes = (
+          <MainContainer>
+            <Switch>
+              <Route exact path="/admin/" component={AdminContainer} />
+              <Route exact path="/" component={AdminContainer} />
+              <Redirect to="/" />
+            </Switch>
+          </MainContainer>
+        );
+      }
+    }
+
+    return <div className="app">{routes}</div>;
   }
 }
 
@@ -53,7 +66,8 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(
       {
-        loginSuccess: authActions.loginSuccess
+        loginSuccess: authActions.loginSuccess,
+        logoutUser: authActions.logoutUser
       },
       dispatch
     )
@@ -62,7 +76,8 @@ function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = state => {
   return {
-    isAuth: state.auth.token !== null
+    isAuth: state.auth.token !== null,
+    role: state.auth.user.role
   };
 };
 

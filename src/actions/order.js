@@ -14,3 +14,7 @@ export const submitOrder = order => ({
   type: Types.SUBMIT_ORDER,
   order
 });
+
+export const submitOrderSuccess = () => ({
+  type: Types.ORDER_SUCCESS
+});

@@ -14,7 +14,28 @@ export const getRestaurantById = id => ({
   id
 });
 
+export const getRestaurantByOwner = id => ({
+  type: Types.GET_RESTAURANT_BY_OWNER,
+  id
+});
+
+export const getRestaurantByOwnerSuccess = restaurant => ({
+  type: Types.GET_RESTAURANT_BY_OWNER_SUCCESS,
+  restaurant
+});
+
 export const getRestaurantByIdSuccess = restaurant => ({
   type: Types.GET_RESTAURANT_BY_ID_SUCCESS,
+  restaurant
+});
+
+export const updateResMenu = (menu, id) => ({
+  type: Types.UPDATE_MENU,
+  menu,
+  id
+});
+
+export const updateResMenuSuccess = restaurant => ({
+  type: Types.UPDATE_MENU_SUCCESS,
   restaurant
 });

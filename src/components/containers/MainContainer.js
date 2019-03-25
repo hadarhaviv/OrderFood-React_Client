@@ -8,10 +8,11 @@ const styles = theme => ({
     paddingLeft: "10px",
     marginRight: "auto",
     marginLeft: "auto",
-    width: "70%",
+    width: "80%",
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    marginTop: "100px"
   }
 });
 

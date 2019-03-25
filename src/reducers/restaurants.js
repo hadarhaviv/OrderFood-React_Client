@@ -19,6 +19,18 @@ export default function restaurants(state = INITIAL_STATE, action) {
         curRestaurant: action.restaurant
       };
     }
+    case Types.GET_RESTAURANT_BY_OWNER_SUCCESS: {
+      return {
+        ...state,
+        curRestaurant: action.restaurant
+      };
+    }
+    case Types.UPDATE_MENU_SUCCESS: {
+      return {
+        ...state,
+        curRestaurant: action.restaurant
+      };
+    }
     default: {
       return state;
     }

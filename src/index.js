@@ -25,9 +25,27 @@ sagaMiddleware.run(rootSaga);
 
 const theme = createMuiTheme({
   overrides: {
+    MuiInput: {
+      root: {
+        marginLeft: "10px"
+      }
+    },
+    MuiPaper: {
+      root: {
+        width: "100%"
+      }
+    },
     MuiIcon: {
       root: {
         margin: "5px"
+      }
+    },
+    MuiButton: {
+      root: {
+        "& a": {
+          textDecoration: "none",
+          color: "#faf9f9"
+        }
       }
     }
   },
@@ -43,10 +61,9 @@ const theme = createMuiTheme({
       contrastText: "#faf9f9"
     },
     secondary: {
-      light: "#0066ff",
-      main: "#0044ff",
-
-      contrastText: "#ffcc00"
+      light: "#f2ccb8",
+      main: "#ea5b0d",
+      contrastText: "#f2ccb8"
     }
   }
 });

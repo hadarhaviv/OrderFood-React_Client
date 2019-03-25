@@ -8,16 +8,16 @@ function* userLogin(action) {
     const result = yield call(api.userLoginApi, action.credentials);
     yield put(actions.loginSuccess(result.data.token));
   } catch (e) {
-    console.log(e);
+    yield put(actions.handleErrors(e.response.data));
   }
 }
 
 function* adminLogin(action) {
   try {
     const result = yield call(api.adminLoginApi, action.credentials);
-    yield put(actions.loginSuccess(result.data));
+    yield put(actions.loginSuccess(result.data.token));
   } catch (e) {
-    console.log(e);
+    yield put(actions.handleErrors(e.response.data));
   }
 }
 

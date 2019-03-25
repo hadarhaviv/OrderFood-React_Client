@@ -93,6 +93,7 @@ class Login extends Component {
             {`${this.state.role} Login`}
           </Typography>
           <TextField
+            error={this.props.errors.email ? true : false}
             id="outlined-email-input"
             label="Email"
             className={classes.textField}
@@ -104,6 +105,12 @@ class Login extends Component {
             onChange={this.handleInputChange}
             value={this.state.email}
           />
+          {this.props.errors.email ? (
+            <Typography color="error" variant="caption" gutterBottom>
+              {this.props.errors.email}
+            </Typography>
+          ) : null}
+
           <TextField
             id="outlined-password-input"
             label="Password"
@@ -116,6 +123,11 @@ class Login extends Component {
             onChange={this.handleInputChange}
             value={this.state.password}
           />
+          {this.props.errors.password ? (
+            <Typography color="error" variant="caption" gutterBottom>
+              {this.props.errors.password}
+            </Typography>
+          ) : null}
           <Button onClick={this.handleLogin} className={classes.button}>
             LOGIN
           </Button>
@@ -125,12 +137,11 @@ class Login extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     cart: state.orders.cart,
-//     restaurant: state.restaurants.curRestaurant
-//   };
-// };
+const mapStateToProps = state => {
+  return {
+    errors: state.auth.errors
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -145,6 +156,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(withStyles(styles)(Login));

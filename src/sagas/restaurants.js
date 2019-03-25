@@ -21,6 +21,25 @@ function* getRestaurantById(action) {
   }
 }
 
+function* getRestaurantByOwner(action) {
+  try {
+    const result = yield call(api.getRestaurantByOwnerApi, action.id);
+    yield put(actions.getRestaurantByOwnerSuccess(result.data));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+function* updateResMenu(action) {
+  console.log(action);
+  try {
+    const result = yield call(api.updateMenu, action.menu, action.id);
+    yield put(actions.updateResMenuSuccess(result.data));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 function* watchGetRestaurantsRequest() {
   yield takeEvery(Types.GET_RESTAURANTS, getRestaurants);
 }
@@ -29,6 +48,19 @@ function* watchGetRestaurantById() {
   yield takeEvery(Types.GET_RESTAURANT_BY_ID, getRestaurantById);
 }
 
-const restaurantsSagas = [fork(watchGetRestaurantsRequest),fork(watchGetRestaurantById)];
+function* watchGetRestaurantByOwner() {
+  yield takeEvery(Types.GET_RESTAURANT_BY_OWNER, getRestaurantByOwner);
+}
+
+function* watchUpdateMenu() {
+  yield takeEvery(Types.UPDATE_MENU, updateResMenu);
+}
+
+const restaurantsSagas = [
+  fork(watchGetRestaurantsRequest),
+  fork(watchGetRestaurantById),
+  fork(watchGetRestaurantByOwner),
+  fork(watchUpdateMenu)
+];
 
 export default restaurantsSagas;
