@@ -4,8 +4,11 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import { fade } from "@material-ui/core/styles/colorManipulator";
+import * as authActions from "../../actions/auth";
+import { bindActionCreators } from "redux";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 const styles = theme => ({
   root: {
@@ -39,6 +42,11 @@ const styles = theme => ({
 });
 
 class NavBar extends Component {
+  handleLogout = () => {
+    this.props.actions.logout();
+    this.props.history.push("/login");
+  };
+
   render() {
     const { classes } = this.props;
     const title = "Tasty Food";
@@ -46,16 +54,12 @@ class NavBar extends Component {
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar>
-            <Link className={classes.menuItem} to="/">
-              <Typography variant="h6" color="inherit">
-                {title}
-              </Typography>
-            </Link>
+            <Typography variant="h6" color="inherit">
+              {title}
+            </Typography>
             <div className={classes.grow} />
-            <Button color="inherit">
-              <Link className={classes.menuItem} to="/login">
-                Logout
-              </Link>
+            <Button onClick={this.handleLogout} color="inherit">
+              Logout
             </Button>
           </Toolbar>
         </AppBar>
@@ -64,4 +68,20 @@ class NavBar extends Component {
   }
 }
 
-export default withStyles(styles)(NavBar);
+const mapDispatchToProps = dispatch => {
+  return {
+    actions: bindActionCreators(
+      {
+        logout: authActions.logoutUser
+      },
+      dispatch
+    )
+  };
+};
+
+export default withRouter(
+  connect(
+    null,
+    mapDispatchToProps
+  )(withStyles(styles)(NavBar))
+);

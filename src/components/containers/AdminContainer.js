@@ -20,7 +20,7 @@ class AdminContainer extends Component {
   };
 
   updateHours = openHours => {
-    console.log(openHours);
+    this.props.actions.updateHours(openHours, this.props.curRestaurant._id);
   };
 
   render() {
@@ -34,7 +34,10 @@ class AdminContainer extends Component {
             updateMenu={this.updateMenu}
             menu={this.props.curRestaurant.menu}
           />
-          <EditOpenHours openHours={this.props.curRestaurant.openhours} />
+          <EditOpenHours
+            openHours={this.props.curRestaurant.openhours}
+            updateHours={this.updateHours}
+          />
         </Paper>
       </React.Fragment>
     );
@@ -53,7 +56,8 @@ const mapDispatchToProps = dispatch => {
     actions: bindActionCreators(
       {
         getRestaurantByOwner: restaurantsActions.getRestaurantByOwner,
-        updateResMenu: restaurantsActions.updateResMenu
+        updateResMenu: restaurantsActions.updateResMenu,
+        updateHours: restaurantsActions.updateHours
       },
       dispatch
     )

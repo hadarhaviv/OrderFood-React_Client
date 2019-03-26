@@ -45,14 +45,22 @@ class EditMenuItems extends Component {
         <ListItem key={item._id}>
           <TextField
             onChange={this.handleInputChange}
-            value={this.state.menuItems[item._id].name}
+            value={
+              this.state.menuItems[item._id]
+                ? this.state.menuItems[item._id].name
+                : ""
+            }
             id={item._id}
             name="name"
             label="name"
           />
           <TextField
             onChange={this.handleInputChange}
-            value={this.state.menuItems[item._id].price}
+            value={
+              this.state.menuItems[item._id]
+                ? this.state.menuItems[item._id].price
+                : ""
+            }
             id={item._id}
             name="price"
             label="price"

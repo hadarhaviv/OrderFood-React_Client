@@ -50,8 +50,12 @@ class Cart extends Component {
     this.props.actions.submitOrder(order);
   };
 
+  handleCancel = () => {
+    this.props.actions.cancelOrder();
+    this.props.history.push("/");
+  };
+
   render() {
-    console.log(this.props);
     const { classes } = this.props;
 
     let itemsList = <div>No items in cart</div>;
@@ -77,7 +81,9 @@ class Cart extends Component {
 
     return (
       <div className={classes.root}>
-        <Button color="secondary">CANCEL</Button>
+        <Button onClick={this.handleCancel} color="secondary">
+          CANCEL
+        </Button>
         <Typography variant="h2" gutterBottom>
           MY CART
         </Typography>
@@ -109,7 +115,8 @@ const mapDispatchToProps = dispatch => {
   return {
     actions: bindActionCreators(
       {
-        submitOrder: ordersActions.submitOrder
+        submitOrder: ordersActions.submitOrder,
+        cancelOrder: ordersActions.cancelOrder
       },
       dispatch
     )

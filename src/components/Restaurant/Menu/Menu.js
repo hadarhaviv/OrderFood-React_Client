@@ -22,7 +22,7 @@ class Menu extends Component {
       <List className={classes.root}>
         {menu.map(item => (
           <ListItem key={item._id}>
-            <ListItemText primary={item.name} secondary={item.category} />
+            <ListItemText primary={item.name} />
             <ListItemText
               primary={`ILS ${
                 cart[item._id]

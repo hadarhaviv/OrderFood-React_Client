@@ -11,8 +11,6 @@ class EditOpenHours extends Component {
 
   componentWillReceiveProps = nextProp => {
     if (nextProp.openHours) {
-      console.log("next", nextProp);
-
       this.setState({
         open: nextProp.openHours.open,
         close: nextProp.openHours.close
@@ -25,6 +23,7 @@ class EditOpenHours extends Component {
       [e.target.name]: e.target.value
     });
   };
+  
 
   render() {
     return (

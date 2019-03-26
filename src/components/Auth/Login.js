@@ -48,7 +48,7 @@ class Login extends Component {
     let role;
     let action;
     if (this.state.role === "User") {
-      role = "Ádmin";
+      role = "Admin";
       action = this.props.actions.adminLogin;
     } else {
       role = "User";
@@ -128,7 +128,12 @@ class Login extends Component {
               {this.props.errors.password}
             </Typography>
           ) : null}
-          <Button onClick={this.handleLogin} className={classes.button}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.handleLogin}
+            className={classes.button}
+          >
             LOGIN
           </Button>
         </form>

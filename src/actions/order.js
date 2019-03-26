@@ -15,6 +15,10 @@ export const submitOrder = order => ({
   order
 });
 
+export const cancelOrder = () => ({
+  type: Types.CANCEL_ORDER
+});
+
 export const submitOrderSuccess = () => ({
   type: Types.ORDER_SUCCESS
 });

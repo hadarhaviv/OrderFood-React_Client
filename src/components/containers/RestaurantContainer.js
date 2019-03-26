@@ -21,6 +21,11 @@ class RestaurantContainer extends Component {
     this.props.actions.addToCart(item);
   };
 
+  handleCancel = () => {
+    this.props.actions.cancelOrder();
+    this.props.history.push("/");
+  };
+
   removeFromCart = itemid => {
     this.props.actions.removeFromCart(itemid);
   };
@@ -28,7 +33,9 @@ class RestaurantContainer extends Component {
   render() {
     return (
       <div style={{ width: "100%" }}>
-        <Button color="secondary">CANCEL</Button>
+        <Button onClick={this.handleCancel} color="secondary">
+          CANCEL
+        </Button>
         <Typography align="center" color="primary" variant="h2" gutterBottom>
           {this.props.restaurant.name}
         </Typography>
@@ -65,7 +72,8 @@ const mapDispatchToProps = dispatch => {
       {
         getRestaurantById: restaurantsActions.getRestaurantById,
         addToCart: orderActions.addToCart,
-        removeFromCart: orderActions.removeFromCart
+        removeFromCart: orderActions.removeFromCart,
+        cancelOrder: orderActions.cancelOrder
       },
       dispatch
     )

@@ -35,7 +35,18 @@ export const updateResMenu = (menu, id) => ({
   id
 });
 
-export const updateResMenuSuccess = restaurant => ({
+export const updateResSuccess = restaurant => ({
   type: Types.UPDATE_MENU_SUCCESS,
+  restaurant
+});
+
+export const updateHours = (hours, id) => ({
+  type: Types.UPDATE_HOURS,
+  hours,
+  id
+});
+
+export const updateHoursSuccess = restaurant => ({
+  type: Types.UPDATE_HOURS_SUCCESS,
   restaurant
 });

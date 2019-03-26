@@ -15,3 +15,7 @@ export const getRestaurantByOwnerApi = id => {
 export const updateMenu = (menu, id) => {
   return axios.post(`/restaurant/${id}/menu`, menu);
 };
+
+export const updateHours = (hours, id) => {
+  return axios.post(`/restaurant/${id}/hours`, hours);
+};

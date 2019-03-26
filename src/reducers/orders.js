@@ -53,6 +53,15 @@ export default function order(state = INITIAL_STATE, action) {
         orderComplete: true
       };
     }
+    case Types.CANCEL_ORDER: {
+      return {
+        ...state,
+        loading: false,
+        orderComplete: false,
+        cart: {},
+        totalPrice: 0
+      };
+    }
     default: {
       return state;
     }
